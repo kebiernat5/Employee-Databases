@@ -1,29 +1,94 @@
 const connection = require("./db");
 const inquirer = require("inquirer");
+const mysql = require("mysql");
 
 init();
 
-// async function init() {
-//   const { postOrBid } = await inquirer.prompt({
-//     name: "postOrBid",
-//     type: "list",
-//     message: "Would you like to [POST] an auction or [BID] on an auction?",
-//     choices: ["POST", "BID", "EXIT"],
-//   });
+function init(){
+    loadPrompts() {
+        prompt([
+            name: "Menu",
+            type: list,
+        ])
+    }
+}
 
-//   switch (postOrBid) {
-//     case "POST":
-//       // Post an item
-//       postItem();
-//       break;
-//     case "BID":
-//       // Bid on an item
-//       bidItem();
-//       break;
-//     default:
-//       process.exit(0);
-//   }
-// }
+const 
+
+newEmployee();
+
+async function newEmployee() {
+  const { newEmp } = await inquirer.prompt({
+    name: "empID",
+    type: "input",
+    message: "What is this employee's ID number?",
+  },
+  {
+    name: "first_name",
+    type: "input",
+    message: "What is this employee's first name?",   
+  },
+  {
+    name: "last_name",
+    type: "input",
+    message: "What is this employee's last name?",   
+  },
+  {
+    name: "role_id",
+    type: "input",
+    message: "Which department does this employee work in?",   
+  },
+  {
+    name: "manager_id",
+    type: "input",
+    message: "Who is this employee's manager?",   
+  },
+  );
+
+  switch (postOrBid) {
+    case "POST":
+      // Post an item
+      postItem();
+      break;
+    case "BID":
+      // Bid on an item
+      bidItem();
+      break;
+    default:
+      process.exit(0);
+  }
+}
+newDept();
+
+async function newDept() {
+    const { newEmp } = await inquirer.prompt({
+      name: "deptName",
+      type: "input",
+      message: "Which department does this employee work for?",
+    },
+
+};
+
+newRole();
+async function newRole() {
+    const { newEmp } = await inquirer.prompt({
+      name: "roleTitle",
+      type: "input",
+      message: "What role is this employee in?",
+    },
+    {
+      name: "roleSalary",
+      type: "input",
+      message: "What is this employee's salary",   
+    },
+    {
+      name: "deptID",
+      type: "input",
+      message: "What department does this employee work for?",   
+    },
+  
+
+};
 
 // async function postItem() {
 //   try {
@@ -110,7 +175,7 @@ init();
 //     ]);
 //     console.log("You successfully out bid the previous bid");
 //   } else {
-//     // User did not outbit highest bid
+//     // User did not outbid highest bid
 //     // inform the user
 //     console.log("You bid too low, try again...");
 //   }
