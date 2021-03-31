@@ -101,7 +101,7 @@ INSERT INTO employee (first_name, last_name, role_id)
 VALUES ("Tucker", "Beauchamp", 1 );
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Dan", "Lucas", 2, 1);
+VALUES ("Kim", "Hage", 2, 1);
 
 INSERT INTO employee (first_name, last_name , role_id, manager_id)
 VALUES ("Sergio", "Gomez", 3 , 1);
