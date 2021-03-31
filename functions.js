@@ -22,25 +22,19 @@ class Database {
     }
 
     ////////add methods (department, role, employee)
-    department_add() {
-        inquirer
-            .prompt({
-                name: "name",
-                type: "input",
-                message: "What is the department name?",
-            })
-            .then(function (response) {
+    department_add(newDepartment) {
+     
                 this.connection.query(
-                    `INSERT INTO department (name) VALUES ("${response.name}")`,
+                    `INSERT INTO department (name) VALUES ("${newDepartment.title.title}")`,
                     function (err, results) {
                         if (err) throw err;
                         console.table(results);
                     }
                 );
-            });
+           
     }
 
-    role_add() {
+    role_add(newRole) {
          return this.connection.query(
             "INSERT INTO role (title,salary,department_id) VALUES (?,?,?)",
             [newRole.title.title,newRole.salary.salary,newRole.department_id.department_id]

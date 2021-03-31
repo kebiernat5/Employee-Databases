@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS employees_db;
 -- Creates the "employees_db" database --
 CREATE DATABASE employees_db;
 
--- Makes it so all of the following code will affect animals_db --
+-- Makes it so all of the following code will affect employees_db --
 USE employees_db;
 
 -- Creates the table "people" within employees_db --creates properties for peopple

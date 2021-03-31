@@ -48,10 +48,9 @@ function loadPrompts() {
         case "Add Role":
           addRole();
           break;
-        // case "Add Department":
-        //   database.department_add();
-        //   init();
-        //   break;
+        case "Add Department":
+          addDepartment();
+          break;
         // case "Update Employee Role":
         //   database.employee_update();
         // //   init();
@@ -134,7 +133,7 @@ async function addEmployee() {
 async function addRole() {
   try{
   const allDepartments = await database.department_view();
-  newRole = {};
+  const newRole = {};
   newRole.title = await
     prompt([
       {
@@ -158,10 +157,30 @@ async function addRole() {
         value: id
       }))
     }]),
-    await database.department_add(newRole);
+    await database.role_add(newRole);
     console.log(newRole)
     console.log("Role has been added!!");
     viewAllRoles();
+  } catch(err) {console.log(err)}
+}
+
+async function addDepartment() {
+  try{
+  const allDepartments = await database.department_view();
+  const newDepartment = {};
+  newDepartment.title = await
+    prompt([
+      {
+        name: "title",
+        type: "input",
+        message: "What is the Department title?",
+      }])
+
+  
+    await database.department_add(newDepartment);
+    console.log(newDepartment)
+    console.log("Department has been added!!");
+    viewAllDepartments();
   } catch(err) {console.log(err)}
 }
 
