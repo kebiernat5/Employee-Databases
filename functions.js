@@ -52,37 +52,12 @@ class Database {
 
     ///////////////update method for employee
     employee_update() {
-        inquirer
-            .prompt([
-                {
-                    name: "first_name",
-                    type: "input",
-                    message:
-                        "What is the first name of the employee that you would like to update?",
-                },
-                {
-                    name: "last_name",
-                    type: "input",
-                    message:
-                        "What is the last name of the employee that you would like to update?",
-                },
-                {
-                    name: "role_id",
-                    type: "input",
-                    message: "What role would you like to change it to?",
-                },
-            ])
-
-            .then(function (response) {
-                this.connection.query(
-                    `Update employee SET role_id = ${response.role_id} WHERE first_name = "${response.first_name}", last_name = "${response.last_name}" `,
-                    function (err, results) {
-                        if (err) throw err;
-                        console.table(results);
-                    }
-                );
-            });
-    }
+        return this.connection.query(
+            "Update employee SET role_id = ? WHERE first_name = ?",
+            [updateEmp.role.role_id, updateEmp.first_name]
+           
+        ); 
+}
 };
 
 //export database and myDatabase

@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const { prompt } = require("inquirer");
 const mysql = require("mysql");
+const { employee_view } = require("./functions");
 // const { department_add } = require("./functions");
 const database = require("./functions");
 // console table
@@ -51,10 +52,9 @@ function loadPrompts() {
         case "Add Department":
           addDepartment();
           break;
-        // case "Update Employee Role":
-        //   database.employee_update();
-        // //   init();
-        //   break;
+        case "Update Employee Role":
+          updateEmployeeRole();
+          break;
         default:
           init();
       }
@@ -151,7 +151,7 @@ async function addRole() {
     prompt([{
       name: "department_id",
       type: "rawlist",
-      message: "what department is it does this Role belong to?",
+      message: "what department does this Role belong to?",
       choices: allDepartments.map(({ id, name }) => ({
         name: name,
         value: id
@@ -184,6 +184,49 @@ async function addDepartment() {
   } catch(err) {console.log(err)}
 }
 
+async function updateEmployeeRole() {
+  const allEmployees = await database.employee_view();
+  const allRoles = await database.role_view();
+  updateEmp = {};
+  updateEmp = await prompt([{
+    name: "first_name",
+    type: "rawlist",
+    message:
+      "What is the name of the employee that you would like to update?",
+    choices: allEmployees.map(({ first_name, last_name }) => ({
+      name: first_name, last_name,
+    }))
+  }]),
+    updateEmp.role = await prompt([{
+      name: "role_id",
+      type: "rawlist",
+      message: "What role would you like to change it to?",
+      choices: allRoles.map(({ id, title }) => ({
+        name: title,
+        value: id,
+      }))
+    }]),
+    console.log(updateEmp)
+    await database.employee_update(updateEmp);
+    console.log("Updating employee role!!")
+    viewAllEmployees();
+
+
+}
+
+
+// function employee_update() {
+//   // get all the employees --> choose which employee
+//   // map over all employees, and render each as option
+
+//   // new set of inquirer.prompts for updating role --> which employee's role to update
+
+//   // show all the roles
+
+//   // database.updateEmployeeRole(empId, roleId);
+
+//   // init()
+//}
 // const connection = require("./db");
 // const inquirer = require("inquirer");
 // const mysql = require("mysql");
